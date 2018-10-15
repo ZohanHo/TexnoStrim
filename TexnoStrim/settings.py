@@ -55,7 +55,7 @@ ROOT_URLCONF = 'TexnoStrim.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],  # Необходимо прописать чтобы видно было корневую папку - templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
