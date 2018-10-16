@@ -27,6 +27,7 @@
         <h1>{{ object.title }}</h1></br>
         <p>{{ object.text}}</p></br>
         <p>{{ object.pub_date }}</p></br>
+        <p>{{ object }}</p></br>
 
         <p>{% url 'detailview' pk=object.pk %}</p></br>  <!--передаем именованый url и pk, но зачем конструкция pk=object.pk не понятно, по pk не выводит -->
 

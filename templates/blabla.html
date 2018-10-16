@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <body>
+    <h1 style="color: blue"> Ш А П К А - которая не меняется </h1>
+
+    <p style="color: red">Вывел страницу через render, моя базовая страница, но отображать буду не базовуб страницу, а ту где все подключено</p>
+
+    <p style="color: green">{{ user }}  - ето находится на базовой странице</p></br>
+
+        {% block content %}{% endblock %} <!-- блок который подключил на главную страницу -->
+
+        <p style="color: red">какойто текст между блоками</p>
+
+        {% block text %}{% endblock %} <!-- блок который подключил на главную страницу -->
+
+        <p style="color: red">какойто текст между блоками</p>
+
+        {% block choto %}{% endblock %} <!-- блок который подключил на главную страницу -->
+
+        <p style="color: red">какойто текст в конце</p>
+
+    <h1 style="color: blue"> Ф У Т Е Р - которая не меняется </h1>
+
+    </body>
+</html>

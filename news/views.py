@@ -28,6 +28,9 @@ def redirect(request): # Редиректит на указаный url
 
     return HttpResponseRedirect("https://www.google.com.ua")
 
+def render_func(request, name="женя", last_name="Сердюк"):
+    return render(request, "blabla.html", {"name": name, "last": last_name}) # В словарь могу добавить контекс дополнительный который могу отобразить по имени в шаблоне
+    # по умолханию доюавляется контекс с context_processors, можно добавить что то от себя,если мы считаем что хотим видеть какуето переменную в шаблонах
 
 """class-based view"""
 
@@ -39,3 +42,6 @@ class MyView(DetailView):
 что тут происходит, определяется метод dispath - который определяет с каким методом запрос к нам пришел, 
 и вызывает соответствующую ф-цию илбо GET либо POST
 """
+
+def show(request, name="Zohan", last_name="Serduk"):
+    return render(request, "content.html",{"name": name, "last": last_name})
