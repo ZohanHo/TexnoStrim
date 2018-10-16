@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>{{ object.title }}</h1></br>
-<p>{{ object.text}}</p></br>
-<p>{{ object.pub_date }}</p></br>
+    {% load static %}  <!--для подключения статистики-->
 
-{% url 'detailview' pk=object.pk %}  <!--передаем именованый url и pk
+    <head>
+        <meta charset="UTF-8">
+        <title>Технострим уроки Django</title>
 
-</body>
+         <!-- отображает значек на вкладке свйта -->
+        <link rel="shortcut icon" href="{% static 'images/favicon/favicon2.png' %}" type="image/png"/> <!--Какртинка для title-->
+        <link rel="stylesheet" href="{% static "style.css" %}"> <!--Для подключения css файла-->
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <!--нужно выбрать эту ссылку (//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js)
+        и нажать Alt + Enter, чтобы загрузить этот файл в вашу библиотеку.-->
+
+    </head>
+    <body>
+        <h1>{{ object.title }}</h1></br>
+        <p>{{ object.text}}</p></br>
+        <p>{{ object.pub_date }}</p></br>
+
+        <p>{% url 'detailview' pk=object.pk %}</p></br>  <!--передаем именованый url и pk, но зачем конструкция pk=object.pk не понятно, по pk не выводит -->
+
+        <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="http://127.0.0.1:8000/tehno/redirect">Google.com.ua</a>
+
+    </body>
 </html>
