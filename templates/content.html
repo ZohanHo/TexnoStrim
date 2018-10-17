@@ -12,8 +12,13 @@
             <option value = "title">Заголовок</option>
             <option value = "text">Текст</option>
         </select>
-        <input type="text" name="search_title"> <!-- тип - текст, серч по какому полю ищем -->
-        <input type="text" name="search_text"> <!-- тип - текст, серч по какому полю ищем -->
+        <input type="text" name="search_title" placeholder="title"> <!-- тип - текст, neme по какому полю ищем -->
+        <input type="text" name="search_text" placeholder="text"> <!-- тип - текст, name по какому полю ищем -->
+        <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
+    </form></br>
+
+    <form action="" method="get"> <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод get по умолчанию, тут можно не указывать -->
+        {{ form }}
         <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
     </form>
 

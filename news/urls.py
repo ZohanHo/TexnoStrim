@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import MyView, Mylistview  # импортировали views.py
+from .views import MyView, Mylistview, Mylistviewnew  # импортировали views.py
 from news import views  # импортировали views.py
 
 urlpatterns = [
@@ -9,6 +9,7 @@ urlpatterns = [
     path('render/', views.render_func, name="render"), #
     path('show/', views.show, name="show"), #
     path('listview/', Mylistview.as_view(), name="listview"), #
+    path('listviewnew/', Mylistviewnew.as_view(), name="listview"), #
 ]
 
 # name="hello"    это именнованый url (роут), шаблону можно дать имя, для того чтобы url можно было включить в шаблон, через специальный тег url, типа id url
