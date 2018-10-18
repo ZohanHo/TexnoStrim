@@ -1,10 +1,11 @@
 """Контролер - функции которые должы принять обьект запроса и вернуть обьект ответа"""
 
-from django.shortcuts import render
+from django.shortcuts import render, resolve_url
 from django.shortcuts import HttpResponse, HttpResponseRedirect
 from django.views.generic import View, DetailView, ListView
 from news.models import Article
-from .forms import Myform
+from .forms import Myform, Azf
+from django.views.generic.edit import CreateView
 
 def show_new(request): # самая простая вьюха, ее нужно добавить в роутер (urls.py)
 
@@ -35,7 +36,7 @@ def render_func(request, name="женя", last_name="Сердюк"):
 
 """class-based view"""
 
-class MyView(DetailView):
+class MyDetailView(DetailView):
     model = Article
     template_name = "detailview.html"
 
@@ -46,6 +47,7 @@ class MyView(DetailView):
 
 def show(request, name="Zohan", last_name="Serduk"):
     return render(request, "content.html",{"name": name, "last": last_name})
+
 
 class Mylistview(ListView):
     mosels = Article
@@ -85,15 +87,16 @@ class Mylistviewnew(ListView):
         # self.sort = request.GET.get("sort") # создаем переменную, и сможем после запроса от пользователя в командной строке в request.GET взять со словаря имя sort
         # self.search_title = request.GET.get("search_title")
         # self.search_text = request.GET.get("search_text")# создаем поле для поиска
-        self.form = Myform(request.GET) # Создаем переменную в которую кладем весь масив self.form = Myform(request.GET), а именно даннные которые пришли от пользователя
+        self.form = Myform(request.GET) # Создаем переменную в которую кладем весь масив request.GET, а именно даннные которые пришли от пользователя в строке запроса
         self.form.is_valid() # метод проверяет соответствуют ли данные той форме которую мы прописали, после чего можем оперировать таким атрибутом как cleaned_data
+        self.vopros = Azf(request.POST or None) # Создали переменную для работы с POST
         return super(Mylistviewnew, self).dispatch(request, *args, **kwargs) # после чего вызываем super, что бы функция работала стандартно
 
 
     def get_queryset(self):  # метод get_queryset, который берет текущую модель и выгребает все
         queryset = Article.objects.all()
 
-        if self.form.cleaned_data.get("search"): # после вызова метода is_valid, заполняется атрибут cleaned_data, с него можем вытащить searc
+        if self.form.cleaned_data.get("search"): # после вызова метода is_valid, заполняется атрибут cleaned_data, с него можем вытащить search
             queryset = queryset.filter(title__icontains=self.form.cleaned_data["search"])
 
         if self.form.cleaned_data.get("sort"): #
@@ -106,4 +109,18 @@ class Mylistviewnew(ListView):
     def get_context_data(self, **kwargs):
         context = super(Mylistviewnew, self).get_context_data(**kwargs) # вызываем метод у родителя
         context["form"] = self.form # добавляем нашу форму, кторая потом доступна в шаблоне
+        context["vopros"] = self.vopros # добавляем нашу форму, кторая потом доступна в шаблоне
         return context
+
+    """Для работы с POST запросом необходимо использовать функцию CreateView
+    """
+class MyCreateView(CreateView):
+    model = Article
+    template_name = "create.html" # с помощью какого шаблона показуем форму для отправки формы для создания
+    #fields = ("title", "text")  # указуем список полей которые будут отодражены при выводе формы для заполнения
+    fields = "__all__"  # указуем список полей которые будут отодражены при выводе формы для заполнения (сейчас все)
+
+    def get_success_url(self): # метод который должен вернуть url на который мы редиректим пользователя в случаее успешного создания модели
+        return resolve_url("detailview", pk=self.object.pk) # имя урла куда нас возвращает после того как создали форму
+# рендерит нас на страницу деталки по именованому урлу, где мы можем благодаря pk=self.object.pk посмотреть именно нами созданую новось
+# так как createview держит текущую внутренюю переменную pk которую мы можем использовать

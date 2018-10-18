@@ -5,6 +5,7 @@ class Article(models.Model): # Описание таблиц для базы д�
     title = models.CharField(max_length=255) # в виде атрибутов (переменных) описуем поля
     text = models.TextField() # используем специальные класы которые находятся в models,  и заканчиваются на fild
     pub_date = models.DateField(auto_now_add=True)
+    user = models.CharField(max_length=255)
 
     def __str__(self):
         return "Наш id = {}".format(self.id)

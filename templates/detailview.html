@@ -24,12 +24,16 @@
 
     </head>
     <body>
+
         <h1>{{ object.title }}</h1></br>
         <p>{{ object.text}}</p></br>
         <p>{{ object.pub_date }}</p></br>
+        <p>{{ object.user }}</p></br>
         <p>{{ object }}</p></br>
 
         <p>{% url 'detailview' pk=object.pk %}</p></br>  <!--передаем именованый url и pk, но зачем конструкция pk=object.pk не понятно, по pk не выводит -->
+
+        <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="http://127.0.0.1:8000/tehno/listviewnew/">К списку новостей</a></br>
 
         <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="http://127.0.0.1:8000/tehno/redirect">Google.com.ua</a>
 

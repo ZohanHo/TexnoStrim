@@ -18,19 +18,21 @@
     </form></br>
 
     <form action="" method="get"> <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод get по умолчанию, тут можно не указывать -->
-        {{ form }}
+        <p style="color: fuchsia">Форма для поиска:{{ form }}</p>
         <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
-    </form>
+    </form></br></br>
 
+    <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="http://127.0.0.1:8000/tehno/createview/">Добавить новость</a>
 
     <p style="color: blue">
-            {% for question in object_list %}</br>
+        {% for question in object_list %}</br> <!-- object_list так можем обращатся к масиву listview-->
             {{ question.pub_date }}</br>
-            {{ question.title }}</br>
-            {{ question.text }}</br>
+               {{ question.title }}</br>
+               {{ question.text }}</br>
+               {{ question.user }}</br>
         {% endfor %}
     </p>
-{% endblock %}
+    {% endblock %}
 
 {% block text %}
     <h1 style="color: darkorange">то что хочу передать в блоке text </h1>

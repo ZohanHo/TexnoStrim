@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form action="" method="post"> <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод post указали. по умолчанию get -->
+        {% csrf_token %}
+        <p style="color: fuchsia">Форма для ввода нового поля: {{ form }}</p>
+        <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
+    </form></br>
+
+</body>
+</html>
