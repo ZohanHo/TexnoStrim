@@ -32,12 +32,13 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.auth',         # Фреймворк аутентификации и моделей по умолчанию.
+    'django.contrib.contenttypes', # Django контент-типовая система (даёт разрешения, связанные с моделями)
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -45,8 +46,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',   # Связывает пользователей, использующих сессии, запросами
+    'django.contrib.messages.middleware.MessageMiddleware',      # Управление сессиями между запросами
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'TexnoStrim.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],  # Необходимо прописать чтобы видно было корневую папку - templates
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Необходимо прописать чтобы видно было корневую папку - templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,4 +128,8 @@ STATICFILES_DIRS = [
     '/static/',
 ]
 
-LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/tehno/listviewnew/' # Редирект пользователя посде успешного логина
+LOGIN_REDIRECT_URL = '/tehno/listviewnew/' # Редирект пользователя посде успешного логина
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # используется для поддержки email
+
+#LOGIN_URL = '/accounts/login/' #  Страница куда будет перенаправлен пользователь если контент доступен только для зарегистрированных пользователей

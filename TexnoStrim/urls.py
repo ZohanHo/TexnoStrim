@@ -14,12 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.contrib.auth.views import login, logout
+from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tehno/', include ("news.urls"), name="news"), # Указуем функцию прописаную в views.py, а именно show_new
-    path('login/', login, {"template_name": "login.html"}), # login импотрируем, и прописуем в шаблоне для него форму
-    path('logout/', logout, {"template_name": "login.html"}), # login импотрируем, и прописуем в шаблоне для него форму
+    path('tehno/', include("news.urls"), name="news"), # Указуем urls который продоллжит обработку urls адресов
+    path('blog/', include("blog.urls"), name="blog"), # Указуем urls который продоллжит обработку urls адресов
+
+    #path('login/', login, {"template_name": "login.html"}), # login импотрируем, и прописуем в шаблоне для него форму
+
+    path('accounts/', include('django.contrib.auth.urls')),
+    #re_path(r'^login/$', views.login, name='login'),
+    #path('logout/', logout, {"template_name": "login.html"}), # login импотрируем, и прописуем в шаблоне для него форму
 ]

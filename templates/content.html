@@ -22,7 +22,7 @@
         <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
     </form></br></br>
 
-    <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="http://127.0.0.1:8000/tehno/createview/">Добавить новость</a>
+    <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="{% url 'createview' %}">Добавить новость</a> <!--таким способом передал именованый урл-->
 
     <p style="color: blue">
         {% for question in object_list %}</br> <!-- object_list так можем обращатся к масиву listview-->
@@ -41,5 +41,8 @@
 
 
 {% block choto %}
-    <h1 style="color: darkorange">то что хочу передать в блоке choto </h1>
+    <h1 style="color: darkorange">то что хочу передать в блоке choto </h1></br>
+
+
+
 {% endblock %}

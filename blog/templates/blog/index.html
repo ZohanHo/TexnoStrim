@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+
+
+{% block post %}
+    {% for post in posts %}
+        <div class="card mb-4">
+            <div class="card-header">
+                {{ post.data_pub }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.body| truncatewords:15 }}</p> <!--обрезал фильтром 15 слов-->
+                <a href="#" class="btn btn-light">Read</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+<div class="card">
+  <div class="card-header">
+    {{ post.data_pub }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.body| truncatewords:15 }}</p> <!--обрезал фильтром 15 слов-->
+    <a href="#" class="btn btn-light">Read</a>
+  </div>
+</div>

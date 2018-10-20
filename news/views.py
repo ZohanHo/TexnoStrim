@@ -31,7 +31,7 @@ def redirect(request): # Редиректит на указаный url
     return HttpResponseRedirect("https://www.google.com.ua")
 
 def render_func(request, name="женя", last_name="Сердюк"):
-    return render(request, "blabla.html", {"name": name, "last": last_name}) # В словарь могу добавить контекс дополнительный который могу отобразить по имени в шаблоне
+    return render(request, "blabla.html", {"name": name, "last": last_name}) # В словарь могу добавить дополнительный контекс который можно отобразить по имени в шаблоне
     # по умолханию доюавляется контекс с context_processors, можно добавить что то от себя,если мы считаем что хотим видеть какуето переменную в шаблонах
 
 """class-based view"""
@@ -124,3 +124,17 @@ class MyCreateView(CreateView):
         return resolve_url("detailview", pk=self.object.pk) # имя урла куда нас возвращает после того как создали форму
 # рендерит нас на страницу деталки по именованому урлу, где мы можем благодаря pk=self.object.pk посмотреть именно нами созданую новось
 # так как createview держит текущую внутренюю переменную pk которую мы можем использовать
+
+
+"""Получение числа визитов"""
+
+def counter(request):
+    num_article = Article.objects.count()  # Чило воностей на сайте
+    num_visits = request.session.get('num_visits', 0) # Хотим получить число визитов, если их нету то говорим что равно 0
+    request.session['num_visits'] = num_visits + 1 # в request.session  увиличиваем num_visits на 1 при каэдом обновлении страницы
+    return render(
+        request,
+        'counts.html',
+        context={'num_article': num_article,
+                 'num_visits': num_visits},
+    )
