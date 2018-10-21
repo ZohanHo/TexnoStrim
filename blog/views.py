@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
-from blog.models import Post
+from blog.models import Post, Teg
 
 def test(request): # Запрос с браузера упаковывается в обьект request который попал на наш сервер
     print()
@@ -19,9 +19,22 @@ def test(request): # Запрос с браузера упаковывается
 
     return HttpResponse("Hello")
 
-def posts_list(request, name = "Женя"): # Запрос с браузера упаковывается в обьект request который попал на наш сервер
-    last_name = "Serduk"
+def posts_list(request): # name = "Женя", Запрос с браузера упаковывается в обьект request который попал на наш сервер
+    #last_name = "Serduk"
     posts = Post.objects.all()
-    return render(request, "blog/index.html", context={"name":name, "last_name":last_name, "posts":posts}) #таким образом можно передать в шаблон контекст
+    return render(request, "blog/index.html", context={"posts":posts}) #таким образом можно передать в шаблон контекст
 
 # Процес наполнения шаблона данными называется - рендеринг
+
+def detail_post(request, slug):  # мы ждем что slug прийдет из имнованной группы символов урла
+    post = Post.objects.get(slug__iexact=slug)
+    return render(request, "blog/post_details.html", context={"post" : post}) # в контекст доступер slug, который возмем с урла
+
+def tegs_list(request):
+     tegs = Teg.objects.all()
+     return render(request, "blog/tegs_list.html", context={"tegs":tegs})
+
+
+def detail_tegs(request, slug):  # мы ждем что slug прийдет из имнованной группы символов урла
+    teg = Teg.objects.get(slug__iexact=slug)
+    return render(request, "blog/tegs_detail.html", context={"teg": teg})

@@ -1,0 +1,11 @@
+{% extends "blog/base_top.html" %}
+
+{% block post %}
+
+    <h1 style="margin-bottom: 5px">Tags:</h1>
+
+    {% for teg in tegs %}
+        <h3><a href="{{ teg.get_absolute_url }}">{{ teg.title }}</a></h3>
+    {% endfor %}
+
+{% endblock%}
