@@ -1,41 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}  <!--для подключения статистики-->
+{% extends "blabla.html" %}
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Технострим уроки Django</title>
+{% block x %}
+    <h1>Новость:</h1>
 
-         <!-- отображает значек на вкладке свйта -->
-        <link rel="shortcut icon" href="{% static 'images/favicon/favicon2.png' %}" type="image/png"/> <!--Какртинка для title-->
-        <link rel="stylesheet" href="{% static "style.css" %}"> <!--Для подключения css файла-->
+    <h2>{{ object_detail }} наша</h2></br>
+    <h2>{{ object_detail.title }}</h2></br>
+    <h3>{{ object_detail.text}}</h3></br>
+    <h4>{{ object_detail.pub_date }}</h4></br>
+    <h5>{{ object_detail.user }}</h5></br>
+    <h6>{{ object_detail }}</h6></br>
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <p>{% url 'detailview' pk=object.pk %}</p></br>  <!--передаем именованый url и pk, но зачем конструкция pk=object.pk не понятно, по pk не выводит -->
 
-        <!--нужно выбрать эту ссылку (//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js)
-        и нажать Alt + Enter, чтобы загрузить этот файл в вашу библиотеку.-->
+    <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="{% url "listviewnew" %}">К списку новостей</a></br>
 
-    </head>
-    <body>
+    <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="{% url "redirect" %}">Google.com.ua</a></br>
 
-        <h1>{{ object.title }}</h1></br>
-        <p>{{ object.text}}</p></br>
-        <p>{{ object.pub_date }}</p></br>
-        <p>{{ object.user }}</p></br>
-        <p>{{ object }}</p></br>
-
-        <p>{% url 'detailview' pk=object.pk %}</p></br>  <!--передаем именованый url и pk, но зачем конструкция pk=object.pk не понятно, по pk не выводит -->
-
-        <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="http://127.0.0.1:8000/tehno/listviewnew/">К списку новостей</a></br>
-
-        <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="http://127.0.0.1:8000/tehno/redirect">Google.com.ua</a>
-
-    </body>
-</html>
+{% endblock %}

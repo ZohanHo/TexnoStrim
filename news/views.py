@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, resolve_url
 from django.shortcuts import HttpResponse, HttpResponseRedirect
-from django.views.generic import View, DetailView, ListView
+from django.views.generic import View, DetailView, ListView, TemplateView
 from news.models import Article
 from .forms import Myform, Azf
 from django.views.generic.edit import CreateView
@@ -31,22 +31,53 @@ def redirect(request): # Редиректит на указаный url
     return HttpResponseRedirect("https://www.google.com.ua")
 
 def render_func(request, name="женя", last_name="Сердюк"):
-    return render(request, "blabla.html", {"name": name, "last": last_name}) # В словарь могу добавить дополнительный контекс который можно отобразить по имени в шаблоне
+    return render(request, "blabla.html", context={"name": name, "last": last_name}) # В словарь request.GET могу добавить дополнительный контекс который можно отобразить по имени в шаблоне
     # по умолханию доюавляется контекс с context_processors, можно добавить что то от себя,если мы считаем что хотим видеть какуето переменную в шаблонах
 
 """class-based view"""
 
+class MyView(View): # Просто рендерит шаблон
+
+    def get(self, request, name="женя", last_name="Сердюк"):
+        return render(request, "news/view.html", context={"name": name, "last": last_name})
+
+# TemplateView - Рендерит шаблон с контекстом который мы ему подготовили, с помощью метода get_context_data
+class MyTemplateView(TemplateView):
+    template_name = "news/templateview.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(MyTemplateView, self).get_context_data(**kwargs)
+        queryset = Article.objects.all() # кверисет ето - список
+        q = queryset[0] # причваиваем переменной q -  нулевой елемент списка (обьект модели)
+        q.title = "LALALALALA" # через точечную нотацию прискаиваем title новое значение
+        q.save() # сохраняем
+        c = Article.objects.filter(id="2")
+        d = Article.objects.filter(title__icontains="LALALALALA") # Выбрать все обьекты где id содержит слово id
+        # for i in range(10): # использовал цыкл до 10
+        #     a = Article(title = "title {}".format(i), text="text {}".format(i)) # в каждой итерации создаю новость
+        #     a.save() # метод save смотрит по id есть ли такая модель, если нету то создает, если есть то обновлят
+        context["question_0"] = q
+        context["id1"] = c
+        context["title"] = d
+        context["question_1"] = queryset[1]
+        context["article"] = queryset
+        context["nickname"] = "John"
+        return context
+
+
 class MyDetailView(DetailView):
     model = Article
     template_name = "detailview.html"
+    context_object_name = "object_detail"  # таким способом можно переименовать тандарный object в свое название, тут object_detail
 
 """
 что тут происходит, определяется метод dispath - который определяет с каким методом запрос к нам пришел, 
-и вызывает соответствующую ф-цию илбо GET либо POST
+и вызывает соответствующую ф-цию илбо GET либо POST, также вызывается метод get, get_template, get_model и отрисовует шаблон
 """
 
+
 def show(request, name="Zohan", last_name="Serduk"):
-    return render(request, "content.html",{"name": name, "last": last_name})
+    return render(request, "content.html", context={"name": name, "last": last_name})
 
 
 class Mylistview(ListView):

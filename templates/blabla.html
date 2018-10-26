@@ -1,55 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Технострим уроки Django</title>
+
+        <!-- ссылка на css bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+        {% load static %}  <!--для подключения статистики-->
+
+         <!-- отображает значек на вкладке свйта -->
+        <link rel="shortcut icon" href="{% static 'images/favicon/favicon2.png' %}" type="image/png"/> <!--Какртинка для title-->
+        <link rel="stylesheet" href="{% static "style.css" %}"> <!--Для подключения css файла-->
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <!--нужно выбрать эту ссылку (//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js)
+        и нажать Alt + Enter, чтобы загрузить этот файл в вашу библиотеку.-->
+
+
+    </head>
     <body>
-
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/Q72Zdbrptbs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-    <!--Также обратите внимание на то, как мы добавили ?next={{request.path}} в конец URLs. Это означает, что следующий
-    URL-адрес содержит адрес (URL) текущей страницы, в конце связанного URL-адреса. После того, как пользователь успешно
-    выполнил вход в систему, представления будут использовать значение "next" чтобы перенаправить пользователя обратно на страницу,
-    где они сначала нажали ссылку входа / выхода из системы.-->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Q72Zdbrptbs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
-    <div class="container" style="margin-left:85%;">
-        <div class="row">
-            <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" >
-                <ul class="sidebar-nav">
-                {% if user.is_authenticated %} <!--проверка имеет ли пользователь видеть етот контекст-->
-                    <li style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700;">Пользователь: {{ user.get_username }}</li>
-                    <li style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700;"><a href="{% url 'logout' %}?next={{request.path}}">Выйти из акаунта</a></li>
-                {% else %}
-                    <li style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700;"><a href="{% url 'login' %}?next={{request.path}}">Войти в свой аккаунт</a></li>
-                {% endif %}
-                </ul>
+
+        <!--Также обратите внимание на то, как мы добавили ?next={{request.path}} в конец URLs. Это означает, что следующий
+        URL-адрес содержит адрес (URL) текущей страницы, в конце связанного URL-адреса. После того, как пользователь успешно
+        выполнил вход в систему, представления будут использовать значение "next" чтобы перенаправить пользователя обратно на страницу,
+        где они сначала нажали ссылку входа / выхода из системы.-->
+
+        <div class="container" style="margin-left:85%;">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" >
+                    <ul class="sidebar-nav">
+                    {% if user.is_authenticated %} <!--проверка имеет ли пользователь видеть етот контекст-->
+                        <li style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700;">Пользователь: {{ user.get_username }}</li>
+                        <li style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700;"><a href="{% url 'logout' %}?next={{request.path}}">Выйти из акаунта</a></li>
+                    {% else %}
+                        <li style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700;"><a href="{% url 'login' %}?next={{request.path}}">Войти в свой аккаунт</a></li>
+                    {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
 
 
-    <h1 style="color: blue"> Ш А П К А - которая не меняется </h1>
+        <h1 style="color: blue"> Ш А П К А - которая не меняется </h1>
 
-    <p style="color: red">Вывел страницу через render, моя базовая страница, но отображать буду не базовуб страницу, а ту где все подключено</p>
+        <p style="color: red">Вывел страницу через render, моя базовая страница, но отображать буду не базовуб страницу, а ту где все подключено</p>
 
-    <p style="color: green">{{ user }}  - ето находится на базовой странице</p></br>
+        <p style="color: green">{{ user }}  - ето находится на базовой странице</p></br>
 
-        {% block content %}{% endblock %} <!-- блок который подключил на главную страницу -->
+            {% block x %}{% endblock %}
 
-        <p style="color: red">какойто текст между блоками</p>
+            {% block content %}{% endblock %} <!-- блок который подключил на главную страницу -->
 
-        {% block text %}{% endblock %} <!-- блок который подключил на главную страницу -->
+            <p style="color: red">какойто текст между блоками</p>
 
-        <p style="color: red">какойто текст между блоками</p>
+            {% block text %}{% endblock %} <!-- блок который подключил на главную страницу -->
 
-        {% block choto %}{% endblock %} <!-- блок который подключил на главную страницу -->
+            <p style="color: red">какойто текст между блоками</p>
 
-        <p style="color: red">какойто текст в конце</p>
+            {% block choto %}{% endblock %} <!-- блок который подключил на главную страницу -->
 
-    <h1 style="color: blue"> Ф У Т Е Р - которая не меняется </h1>
+            <p style="color: red">какойто текст в конце</p>
+
+        <h1 style="color: blue"> Ф У Т Е Р - которая не меняется </h1>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 
     </body>
 </html>

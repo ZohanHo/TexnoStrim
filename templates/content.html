@@ -1,48 +1,49 @@
 {% extends "blabla.html" %}
 
-{% block content %}
-    <h1 style="color: darkorange">то что хочу передать в блоке context </h1>
-    <h1 style="color: darkorange">{{ objects }} - ето контекст</h1>
 
 
-    <form action="" method="get"> <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод get по умолчанию, тут можно не указывать -->
-        <select name ="sort"> <!-- тут указуем имя (name) параметра которое задает поле, наш sort -->
-            <option value = "id">ID</option> <!-- тут указуем значение (value) параметра которое задает поле, id, pub_date, title -->
-            <option value = "pub_date">Дата создания</option>
-            <option value = "title">Заголовок</option>
-            <option value = "text">Текст</option>
-        </select>
-        <input type="text" name="search_title" placeholder="title"> <!-- тип - текст, neme по какому полю ищем -->
-        <input type="text" name="search_text" placeholder="text"> <!-- тип - текст, name по какому полю ищем -->
-        <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
-    </form></br>
-
-    <form action="" method="get"> <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод get по умолчанию, тут можно не указывать -->
-        <p style="color: fuchsia">Форма для поиска:{{ form }}</p>
-        <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
-    </form></br></br>
-
-    <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="{% url 'createview' %}">Добавить новость</a> <!--таким способом передал именованый урл-->
-
-    <p style="color: blue">
-        {% for question in object_list %}</br> <!-- object_list так можем обращатся к масиву listview-->
-            {{ question.pub_date }}</br>
-               {{ question.title }}</br>
-               {{ question.text }}</br>
-               {{ question.user }}</br>
-        {% endfor %}
-    </p>
-    {% endblock %}
-
-{% block text %}
-    <h1 style="color: darkorange">то что хочу передать в блоке text </h1>
-    <h1 style="color: darkorange">{{ last }} - ето контекст</h1>
-{% endblock %}
+    {% block content %}
+        <h1 style="color: darkorange">то что хочу передать в блоке context </h1>
+        <h1 style="color: darkorange">{{ objects }} - ето контекст</h1>
 
 
-{% block choto %}
-    <h1 style="color: darkorange">то что хочу передать в блоке choto </h1></br>
+        <form action="" method="get"> <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод get по умолчанию, тут можно не указывать -->
+            <label>
+                <select name="sort"> <!-- тут указуем имя (name) параметра которое задает поле, наш sort -->
+                    <option value="id">ID</option>
+                    <!-- тут указуем значение (value) параметра которое задает поле, id, pub_date, title -->
+                    <option value="pub_date">Дата создания</option>
+                    <option value="title">Заголовок</option>
+                    <option value="text">Текст</option>
+                </select>
+            </label>
+            <input type="text" name="search_title" placeholder="title"> <!-- тип - текст, neme по какому полю ищем -->
+            <input type="text" name="search_text" placeholder="text"> <!-- тип - текст, name по какому полю ищем -->
+            <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
+        </form></br>
 
+        <form action="" method="get"> <!-- actions урл на какой уйдет запрос после того как форма будет засабмичена, метод get по умолчанию, тут можно не указывать -->
+            <p style="color: fuchsia">Форма для поиска:{{ form }}</p>
+            <input type="submit"> <!-- кнопка отправки формы на сервер, после чего будет произведен запрос, в данном случаа GET -->
+        </form></br></br>
 
+        <a style="color: darkviolet; font-family: 'Comic Sans MS'; font-weight: 700; " href="{% url 'createview' %}">Добавить новость</a> <!--таким способом передал именованый урл-->
 
-{% endblock %}
+        <p style="color: blue">
+            {% for question in object_list %} <!-- object_list так можем обращатся к масиву listview-->
+                {{ question.pub_date }}</br>
+                {{ question.title }}</br>
+                {{ question.text }}</br>
+                {{ question.user }}</br>
+            {% endfor %}
+        </p>
+        {% endblock %}
+
+        {% block text %}
+            <h1 style="color: darkorange">то что хочу передать в блоке text </h1>
+            <h1 style="color: darkorange">{{ last }} - ето контекст</h1>
+        {% endblock %}
+
+        {% block choto %}
+            <h1 style="color: darkorange">то что хочу передать в блоке choto </h1></br>
+        {% endblock %}

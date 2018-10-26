@@ -13,7 +13,7 @@ class Article(models.Model): # Описание таблиц для базы д�
     user = models.CharField(max_length=255)
 
     def __str__(self):
-        return "Наш id = {}".format(self.id)
+        return "Наш id = {}, title = {}".format(self.id, self.title)
 
     class Meta:
         verbose_name = "Вопрос"

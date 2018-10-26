@@ -1,0 +1,28 @@
+{% extends "blabla.html" %}
+
+
+
+{% block x %}
+    {% for art in article %}
+        <div class="card mb-4">
+    <div class="card-header">
+        {{ art.pub_date | date:"c"}}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ art.title }}</h5>
+        <p class="card-text">{{ art.text| truncatewords:15 }}</p> <!--обрезал фильтром 15 слов-->
+        <a href="#" class="btn btn-light">Read</a>
+    </div>
+    <div class="card-footer text-muted">
+
+
+
+
+    </div>
+</div>
+
+
+        {{ id1 }} вот вот
+        {{ title }} вот еще
+    {% endfor %}
+{% endblock %}
